@@ -6,9 +6,9 @@
     
 <%
 	GuestDao GuestDao = new GuestDao();
-	List<GuestVo> personList = GuestDao.guestSelect("");
+	List<GuestVo> guestList = GuestDao.guestSelect("");
 	
-	System.out.println(personList);
+	System.out.println(guestList);
 
 %>
     
@@ -21,32 +21,32 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form>
+	<form action="./add.jsp" method="get">
 		<table border="1" width="540px">
 			<tr>
-				<td>이름</td><td><input type="text" name=""></td>
-				<td>비밀번호</td><td><input type="password" name=""></td>
+				<td>이름</td><td><input type="text" name="name" value=""></td>
+				<td>비밀번호</td><td><input type="password" name="password" value="password"></td>
 			</tr>
 			<tr>
-				<td colspan="4"><textarea cols="72" rows="5"></textarea></td>
+				<td colspan="4"><textarea cols="72" rows="5" type="text" name="content" value="" ></textarea></td>
 			</tr>
 			<tr>
-				<td colspan="4"><button type="">등록</button></td>
+				<td colspan="4"><button type="submit">등록</button></td>
 			</tr>
 		</table>
 	</form>
 	<br>
 
-	<%for(int i=0;i<personList.size();i++) {%>
+	<%for(int i=0;i<guestList.size();i++) {%>
 		<table border="1" width="540px">
 			<tr>
-				<td><%=personList.get(i).getNo()%></td>
-				<td><%=personList.get(i).getName()%></td>
-				<td><%=personList.get(i).getRegDate()%></td>
-				<td><a href="./deleteForm.jsp">삭제</a></td>
+				<td><%=guestList.get(i).getNo()%></td>
+				<td><%=guestList.get(i).getName()%></td>
+				<td><%=guestList.get(i).getRegDate()%></td>
+				<td><a href="./deleteForm.jsp?no=<%=guestList.get(i).getNo()%>">삭제</a></td>
 			</tr>
 			<tr>
-				<td colspan="4"><%=personList.get(i).getContent()%></td>
+				<td colspan="4"><%=guestList.get(i).getContent()%></td>
 			</tr>
 		</table>
 		<br>

@@ -69,6 +69,8 @@ public class GuestDao {
 		public List<GuestVo> guestSelect(String keyword) {
 
 			List<GuestVo> guestList = new ArrayList<GuestVo>();
+			System.out.println(keyword);
+			System.out.println(guestList);
 
 			this.getConnect();
 
@@ -76,11 +78,11 @@ public class GuestDao {
 				// 3. SQL문 준비 / 바인딩 / 실행
 				// SQL문 준비
 				String query = "";
-				query += " select  no, ";
-				query += "         name, ";
-				query += "         password, ";
-				query += "         content ";
-				query += "         reg_date ";
+				query += " select  no ";
+				query += "         ,name ";
+				query += "         ,password ";
+				query += "         ,content ";
+				query += "         ,reg_date ";
 				query += " from guestbook ";
 				/**********************************************************************/
 				if(!keyword.equals("")) { //keyword가 ""가 아니면 ==> keyword가 있으면 검색
@@ -133,15 +135,14 @@ public class GuestDao {
 				// SQL문 준비
 				String query = "";
 				query += " insert into guestbook ";
-				query += " values(seq_no.nextval, ?, ?, ?,?) ";
+				query += " values(seq_no.nextval, ?, ?, ?, SYSDATE) ";
 
 				pstmt = conn.prepareStatement(query);
 
-				// 바인딩 vo에서 값을 setter로 꺼낸다
+				// 바인딩 값을 vo에 setter로 넣어준다
 				pstmt.setString(1, guestVo.getName());
 				pstmt.setString(2, guestVo.getPassword());
 				pstmt.setString(3, guestVo.getContent());
-				pstmt.setString(4, guestVo.getRegDate());
 
 				// 실행
 				count = pstmt.executeUpdate();
@@ -158,8 +159,8 @@ public class GuestDao {
 			return count;
 		}
 
-		// 사람삭제
-		public int guestDelete(int guestNo) {
+		// 방명록삭제
+		public int guestDelete(int guestNo, String password) {
 
 			int count = -1;
 
@@ -169,14 +170,16 @@ public class GuestDao {
 				// 3. SQL문 준비 / 바인딩 / 실행
 				// SQL문 준비
 				String query = "";
-				query += " delete from person ";
-				query += " where password = ? ";
+				query += " delete from guestbook ";
+				query += " where no = ? ";
+				query += " and password = ? ";
 
 				pstmt = conn.prepareStatement(query);
 
 				// 바인딩
 				pstmt.setInt(1, guestNo);
-
+				pstmt.setString(2, password);
+				
 				// 실행
 				count = pstmt.executeUpdate();
 
