@@ -25,7 +25,7 @@
 		<table border="1" width="540px">
 			<tr>
 				<td>이름</td><td><input type="text" name="name" value=""></td>
-				<td>비밀번호</td><td><input type="password" name="password" value="password"></td>
+				<td>비밀번호</td><td><input type="password" name="password" value=""></td>
 			</tr>
 			<tr>
 				<td colspan="4"><textarea cols="72" rows="5" type="text" name="content" value="" ></textarea></td>

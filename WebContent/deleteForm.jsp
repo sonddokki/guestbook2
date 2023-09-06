@@ -22,10 +22,11 @@
 
 
 
-	<form>
+	<form action="./delete.jsp" method="get">
 		<table>
 			<tr>
 				<td>비밀번호</td>
+				<td><input type="hidden" name="no" value="<%=request.getParameter("no")%>"></td>
 				<td><input type="password" name="password" value=""></td>
 				<td><button href="./delete.jsp?no=" type="submit">삭제</button></td>
 			</tr>
